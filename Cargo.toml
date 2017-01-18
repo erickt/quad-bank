@@ -1,0 +1,6 @@
+[package]
+name = "quadrilateral"
+version = "0.1.0"
+authors = ["Erick Tryzelaar <erick.tryzelaar@gmail.com>"]
+
+[dependencies]
