@@ -1,0 +1,17 @@
+[package]
+name = "quad-rocket"
+version = "0.1.0"
+authors = ["Erick Tryzelaar <erick.tryzelaar@gmail.com>"]
+
+[dependencies]
+diesel = "0.11.0"
+error-chain = "0.9.0"
+quad-bank = { path = "../quad-bank" }
+r2d2 = "0.7.1"
+r2d2-diesel = { version = "0.11.0", features = ["sqlite"] }
+rocket = "0.2.0"
+rocket_codegen = "0.2.0"
+rocket_contrib = "0.2.0"
+serde = "0.9.0"
+serde_derive = "0.9.0"
+serde_json = "0.9.0"
