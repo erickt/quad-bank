@@ -1,5 +1,4 @@
-#[macro_use] extern crate clap;
-#[macro_use] extern crate error_chain;
+extern crate clap;
 extern crate diesel;
 extern crate quad_bank;
 
@@ -7,39 +6,23 @@ use clap::{Arg, App, SubCommand};
 use diesel::prelude::*;
 use quad_bank::models::*;
 use quad_bank::schema::accounts;
-use std::io::{self, Write};
-use std::process;
-
-error_chain! {
-    foreign_links {
-        DieselConnectionError(diesel::ConnectionError);
-        DieselResultError(diesel::result::Error);
-        ClapError(clap::Error);
-    }
-
-    errors {
-        NoCommandSpecified {
-            description("no command specified")
-        }
-    }
-}
 
 fn main() {
-    if let Err(err) = run() {
-        let mut stderr = io::stderr();
-        writeln!(&mut stderr, "error: {}", err).unwrap();
-        process::exit(1);
-    }
-}
-
-fn run() -> Result<()> {
-    let app = App::new("quad-admin");
-    let matches = app
-        .version(crate_version!())
-        .author(crate_authors!())
-        .subcommand(SubCommand::with_name("show-accounts"))
+    let matches = App::new("quad-admin")
+        .arg(Arg::with_name("database")
+             .short("d")
+             .long("database")
+             .value_name("DATABASE")
+             .takes_value(true)
+             .required(true)
+             .help("the path to the sqlite database"))
+        .subcommand(
+            SubCommand::with_name("show-accounts")
+                .about("show all accounts in bank")
+        )
         .subcommand(
             SubCommand::with_name("create-account")
+                .about("Creates a new account")
                 .arg(Arg::with_name("username")
                      .takes_value(true)
                      .required(true)
@@ -51,6 +34,7 @@ fn run() -> Result<()> {
         )
         .subcommand(
             SubCommand::with_name("transfer")
+                .about("Transfers balance between two accounts")
                 .arg(Arg::with_name("src_username")
                      .takes_value(true)
                      .required(true)
@@ -66,41 +50,47 @@ fn run() -> Result<()> {
         )
         .get_matches();
 
-    let conn = quad_bank::establish_connection()?;
+    let database_url = matches.value_of("database")
+        .expect("database not found");
+    let conn = quad_bank::establish_connection(&database_url);
 
     match matches.subcommand() {
         ("show-accounts", Some(_)) => {
-            let results = accounts::table.load::<Account>(&conn)?;
+            let results = accounts::table.load::<Account>(&conn)
+                .expect("failed to load accounts");
 
             println!("Displaying {} accounts", results.len());
             for account in results {
                 println!("{}\t{}\t{}", account.id, account.username, account.balance);
             }
-
-            Ok(())
         }
         ("create-account", Some(matches)) => {
-            let username = matches.value_of("username").unwrap();
-            let balance = value_t!(matches, "balance", i32).unwrap();
+            let username = matches.value_of("username")
+                .expect("username was not present");
+            let balance = matches.value_of("balance")
+                .expect("balance argument was not present")
+                .parse::<i32>()
+                .expect("balance was not an integer");
 
-            quad_bank::create_account(&conn, username, balance)?;
+            quad_bank::create_account(&conn, username, balance)
+                .expect("failed create account");
             println!("account created");
-
-            Ok(())
         }
         ("transfer", Some(matches)) => {
-            let src_username = matches.value_of("src_username").unwrap();
-            let dst_username = matches.value_of("dst_username").unwrap();
-            let amount = value_t!(matches, "amount", i32).unwrap();
+            let src_username = matches.value_of("src_username")
+                .expect("src_username was not present");
+            let dst_username = matches.value_of("dst_username")
+                .expect("dst_username was not present");
+            let amount = matches.value_of("amount")
+                .expect("amount was not present")
+                .parse::<i32>()
+                .expect("amount to transfer is not an integer");
 
-            quad_bank::transfer(&conn, src_username, dst_username, amount)?;
+            quad_bank::transfer(&conn, src_username, dst_username, amount)
+                .expect("failed to transfer balance");
             println!("transfer completed");
-
-            Ok(())
         }
-        ("", None) => {
-            bail!(ErrorKind::NoCommandSpecified)
-        }
+        ("", None) => {}
         _ => { unreachable!() }
     }
 }

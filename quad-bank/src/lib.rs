@@ -1,7 +1,6 @@
 #[macro_use] extern crate diesel;
 #[macro_use] extern crate diesel_codegen;
 #[macro_use] extern crate serde_derive;
-extern crate dotenv;
 extern crate serde;
 
 pub mod models;
@@ -11,18 +10,13 @@ use diesel::Connection;
 use diesel::prelude::*;
 use diesel::result::Error as ResultError;
 use diesel::sqlite::SqliteConnection;
-use std::env;
 
 use models::{Account, NewAccount};
 use schema::accounts;
 
-pub fn establish_connection() -> Result<SqliteConnection, diesel::ConnectionError> {
-    dotenv::dotenv().ok();
-
-    let database_url = env::var("DATABASE_URL")
-        .expect("DATABASE_URL must be set");
-
-    SqliteConnection::establish(&database_url)
+pub fn establish_connection(database_url: &str) -> SqliteConnection {
+    SqliteConnection::establish(database_url)
+        .expect(&format!("failed to connect to database {}", database_url))
 }
 
 pub fn all_accounts(conn: &SqliteConnection) -> Result<Vec<Account>, ResultError> {
