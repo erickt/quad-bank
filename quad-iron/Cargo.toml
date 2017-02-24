@@ -1,0 +1,19 @@
+[package]
+name = "quad-iron"
+version = "0.1.0"
+authors = ["Erick Tryzelaar <erick.tryzelaar@gmail.com>"]
+
+[dependencies]
+bodyparser = "0.6.0"
+diesel = "0.11.0"
+iron = "0.5.1"
+logger = "0.3.0"
+persistent = "0.3.0"
+quad-diesel = { path = "../quad-diesel" }
+r2d2 = "0.7.1"
+r2d2-diesel = { version = "0.11.0", features = ["sqlite"] }
+router = "0.5.1"
+serde = "0.9.0"
+serde_derive = "0.9.0"
+serde_json = "0.9.0"
+simplelog = "0.4.2"

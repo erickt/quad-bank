@@ -8,4 +8,5 @@ rust:
 script:
 - ./bootstrap.sh
 - (cd quad-diesel && travis-cargo build)
+- (cd quad-iron && travis-cargo build)
 - (cd quad-rocket && travis-cargo --only nightly build)
