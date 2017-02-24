@@ -5,7 +5,7 @@ authors = ["Erick Tryzelaar <erick.tryzelaar@gmail.com>"]
 
 [dependencies]
 diesel = "0.11.0"
-quad-bank = { path = "../quad-bank" }
+quad-diesel = { path = "../quad-diesel" }
 r2d2 = "0.7.1"
 r2d2-diesel = { version = "0.11.0", features = ["sqlite"] }
 rocket = "0.2.0"
