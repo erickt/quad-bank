@@ -11,6 +11,5 @@ fi
 echo Running the migrations...
 
 # Create the database.
-diesel migration run \
-	--database-url db.sqlite \
-	--migration-dir quad-diesel/migrations
+export DATABASE_URL=db.sqlite
+diesel migration run --migration-dir quad-diesel/migrations
