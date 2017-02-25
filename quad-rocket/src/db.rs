@@ -1,22 +1,14 @@
-use std::ops::Deref;
-
-use r2d2;
 use diesel::sqlite::SqliteConnection;
+use quad_diesel::SqliteConnectionPool as Pool;
+use r2d2::PooledConnection;
 use r2d2_diesel::ConnectionManager;
-
 use rocket::http::Status;
 use rocket::request::{self, FromRequest};
 use rocket::{Request, State, Outcome};
+use std::ops::Deref;
 
-pub type Pool = r2d2::Pool<ConnectionManager<SqliteConnection>>;
-
-pub fn init_pool(database_file: &str) -> Pool {
-    let config = r2d2::Config::default();
-    let manager = ConnectionManager::<SqliteConnection>::new(database_file);
-    r2d2::Pool::new(config, manager).expect("db pool")
-}
-
-pub struct Conn(r2d2::PooledConnection<ConnectionManager<SqliteConnection>>);
+/// Create an adaptor that helps Rocket extract the database connection pool from the request.
+pub struct Conn(PooledConnection<ConnectionManager<SqliteConnection>>);
 
 impl Deref for Conn {
     type Target = SqliteConnection;

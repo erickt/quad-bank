@@ -1,76 +1,27 @@
 #[macro_use] extern crate diesel;
 #[macro_use] extern crate diesel_codegen;
 #[macro_use] extern crate serde_derive;
+extern crate r2d2;
+extern crate r2d2_diesel;
 extern crate serde;
 
 pub mod models;
 pub mod schema;
 
-use diesel::Connection;
-use diesel::prelude::*;
-use diesel::result::Error as ResultError;
 use diesel::sqlite::SqliteConnection;
+use diesel::{Connection, ConnectionError};
 
-use models::{Account, NewAccount};
-use schema::accounts;
+pub type SqliteConnectionPool = r2d2::Pool<r2d2_diesel::ConnectionManager<SqliteConnection>>;
 
-pub fn establish_connection(database_url: &str) -> SqliteConnection {
+/// Create a connection to the database.
+pub fn establish_connection(database_url: &str) -> Result<SqliteConnection, ConnectionError> {
     SqliteConnection::establish(database_url)
-        .expect(&format!("failed to connect to database {}", database_url))
 }
 
-pub fn all_accounts(conn: &SqliteConnection) -> Result<Vec<Account>, ResultError> {
-    accounts::table.load::<Account>(conn)
-}
-
-pub fn account_for_username(conn: &SqliteConnection,
-                            username: &str) -> Result<Account, ResultError> {
-    accounts::table
-        .filter(accounts::username.eq(username))
-        .first::<Account>(conn)
-}
-
-pub fn create_account(conn: &SqliteConnection,
-                      username: &str,
-                      balance: i32) -> Result<Account, ResultError> {
-    let new_account = NewAccount {
-        username: username,
-        balance: balance,
-    };
-
-    conn.transaction(|| {
-        diesel::insert(&new_account).into(accounts::table)
-            .execute(conn)?;
-
-        let account = accounts::table
-            .order(accounts::id.desc())
-            .first(conn)?;
-
-        Ok(account)
-    })
-}
-
-pub fn transfer(conn: &SqliteConnection,
-                src_username: &str,
-                dst_username: &str,
-                amount: i32) -> Result<(), ResultError> {
-    use schema::accounts::dsl::*;
-
-    conn.transaction(|| {
-        let mut src_account = accounts
-            .filter(username.eq(src_username))
-            .first::<Account>(conn)?;
-
-        let mut dst_account = accounts
-            .filter(username.eq(dst_username))
-            .first::<Account>(conn)?;
-
-        src_account.balance -= amount;
-        dst_account.balance += amount;
-
-        src_account.save_changes::<Account>(conn)?;
-        dst_account.save_changes::<Account>(conn)?;
-
-        Ok(())
-    })
+/// Create a pool of connections to the database.
+pub fn establish_connection_pool(database_url: &str)
+                                 -> Result<SqliteConnectionPool, r2d2::InitializationError> {
+    let config = r2d2::Config::default();
+    let manager = r2d2_diesel::ConnectionManager::new(database_url);
+    r2d2::Pool::new(config, manager)
 }
