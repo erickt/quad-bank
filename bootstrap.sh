@@ -3,6 +3,7 @@
 cd `dirname $0`
 
 export PATH=$HOME/.local/bin:$PATH
+export DATABASE_URL=db.sqlite
 
 # Install diesel CLI if they're not installed.
 if ! command -v diesel >/dev/null 2>&1; then
@@ -13,5 +14,4 @@ fi
 echo Running the migrations...
 
 # Create the database.
-export DATABASE_URL=db.sqlite
-diesel migration run --migration-dir quad-diesel/migrations
+diesel migration run

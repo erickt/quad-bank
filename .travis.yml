@@ -17,10 +17,11 @@ rust:
 before_script:
 - |
     pip install 'travis-cargo<0.2' --user &&
-    export PATH=$HOME/.local/bin:$PATH
+    export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 
 script:
 - ./bootstrap.sh
 - (cd quad-diesel && travis-cargo build)
+- (cd quad-cli && travis-cargo build)
 - (cd quad-iron && travis-cargo build)
 - (cd quad-rocket && travis-cargo --only nightly build)

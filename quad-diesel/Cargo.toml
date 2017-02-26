@@ -4,7 +4,6 @@ version = "0.1.0"
 authors = ["Erick Tryzelaar <erick.tryzelaar@gmail.com>"]
 
 [dependencies]
-clap = "2.20.5"
 diesel = { version = "0.11.0", features = ["sqlite"] }
 diesel_codegen = { version = "0.11.0", features = ["sqlite"] }
 r2d2 = "0.7.1"

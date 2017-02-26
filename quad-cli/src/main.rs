@@ -10,16 +10,14 @@ fn main() {
     // We use clap to create a simple commandline interface. This will parse out the following
     // commands:
     //
-    //   admin --database ../db.sqlite show-accounts
-    //   admin --database ../db.sqlite create-account erickt 100
-    //   admin --database ../db.sqlite transfer erickt carols10cents 10
+    //   admin show-accounts
+    //   admin create-account erickt 100
+    //   admin transfer erickt carols10cents 10
     let matches = App::new("quad-admin")
-        .arg(Arg::with_name("database")
-            .short("d")
-            .long("database")
+        .arg(Arg::with_name("database-url")
+            .long("database-url")
             .value_name("DATABASE")
             .takes_value(true)
-            .required(true)
             .help("the path to the sqlite database"))
         .subcommand(SubCommand::with_name("show-accounts").about("show all accounts in diesel"))
         .subcommand(SubCommand::with_name("create-account")
@@ -49,8 +47,7 @@ fn main() {
         .get_matches();
 
     // Now that we parsed our commandline arguments, lets connect to the database.
-    let database_url = matches.value_of("database")
-        .expect("database not found");
+    let database_url = matches.value_of("database-url").unwrap_or("../db.sqlite");
     let conn = quad_diesel::establish_connection(&database_url)
         .expect("failed to connect to database");
 
