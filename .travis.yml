@@ -11,7 +11,9 @@ addons:
 rust:
 - stable
 - beta
-- nightly
+# FIXME: Waiting for https://github.com/rust-lang/rust/pull/40111 to land
+#- nightly
+- nightly-2017-02-12
 
 # load travis-cargo
 before_script:
