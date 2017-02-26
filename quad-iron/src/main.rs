@@ -140,8 +140,11 @@ fn main() {
 
     chain.link_after(logger_after);
 
+    let address = "localhost:8000";
+    println!("listening on {}", address);
+
     // Finally, launch the server.
     Iron::new(chain)
-        .http("localhost:8000")
+        .http(address)
         .unwrap();
 }

@@ -13,12 +13,12 @@ use diesel::{Connection, ConnectionError};
 
 pub type SqliteConnectionPool = r2d2::Pool<r2d2_diesel::ConnectionManager<SqliteConnection>>;
 
-/// Create a connection to the database.
+/// Create a connection to the SQLite database.
 pub fn establish_connection(database_url: &str) -> Result<SqliteConnection, ConnectionError> {
     SqliteConnection::establish(database_url)
 }
 
-/// Create a pool of connections to the database.
+/// Create a pool of SQLite connections to the database.
 pub fn establish_connection_pool(database_url: &str)
                                  -> Result<SqliteConnectionPool, r2d2::InitializationError> {
     let config = r2d2::Config::default();
