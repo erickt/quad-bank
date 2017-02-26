@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["expand_infer_table_from_schema",""],["handle_schema",""],["load_table_names",""]],"struct":[["TableData",""]]});

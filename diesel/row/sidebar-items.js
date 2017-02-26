@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["Row","The row trait which is used for [`FromSqlRow`][]. Apps should not need to concern themselves with this trait."]]});

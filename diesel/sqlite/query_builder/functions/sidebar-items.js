@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["insert_or_replace","Creates a SQLite `INSERT OR REPLACE` statement. If a constraint violation fails, SQLite will attempt to replace the offending row instead."]]});

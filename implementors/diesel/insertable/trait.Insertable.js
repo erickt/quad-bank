@@ -1,0 +1,10 @@
+(function() {var implementors = {};
+implementors["quad_diesel"] = ["impl&lt;'a, 'insert, DB&gt; <a class='trait' href='diesel/insertable/trait.Insertable.html' title='diesel::insertable::Insertable'>Insertable</a>&lt;<a class='struct' href='quad_diesel/schema/accounts/struct.table.html' title='quad_diesel::schema::accounts::table'>table</a>, DB&gt; for &amp;'insert <a class='struct' href='quad_diesel/models/struct.NewAccount.html' title='quad_diesel::models::NewAccount'>NewAccount</a>&lt;'a&gt; <span class='where fmt-newline'>where DB: <a class='trait' href='diesel/backend/trait.Backend.html' title='diesel::backend::Backend'>Backend</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a>ColumnInsertValue&lt;<a class='struct' href='quad_diesel/schema/accounts/columns/struct.username.html' title='quad_diesel::schema::accounts::columns::username'>username</a>, AsNullableExpr&lt;&amp;'insert &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, <a class='struct' href='quad_diesel/schema/accounts/columns/struct.username.html' title='quad_diesel::schema::accounts::columns::username'>username</a>&gt;&gt;, ColumnInsertValue&lt;<a class='struct' href='quad_diesel/schema/accounts/columns/struct.balance.html' title='quad_diesel::schema::accounts::columns::balance'>balance</a>, AsNullableExpr&lt;&amp;'insert <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>, <a class='struct' href='quad_diesel/schema/accounts/columns/struct.balance.html' title='quad_diesel::schema::accounts::columns::balance'>balance</a>&gt;&gt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>: InsertValues&lt;DB&gt;</span>",];
+
+            if (window.register_implementors) {
+                window.register_implementors(implementors);
+            } else {
+                window.pending_implementors = implementors;
+            }
+        
+})()

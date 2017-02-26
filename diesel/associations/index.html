@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `associations` mod in crate `diesel`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, associations">
+
+    <title>diesel::associations - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>diesel</a></p><script>window.sidebarCurrent = {name: 'associations', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>diesel</a>::<wbr><a class='mod' href=''>associations</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../src/diesel/associations/mod.rs.html#2-157' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>Traits related to relationships between multiple tables.</p>
+
+<p><strong>Note: This feature is under active development, and we are seeking feedback on the APIs that
+have been released. Please feel free to <a href="https://github.com/diesel-rs/diesel/issues/new">open issues</a>, or join <a href="https://gitter.im/diesel-rs/diesel">our chat</a>
+to provide feedback.</strong></p>
+
+<p>Note: This guide is written assuming the usage of <code>diesel_codegen</code> or <code>diesel_codegen_syntex</code>.
+Associations in Diesel are bidirectional, but primarily focus on the child-to-parent
+relationship. You can declare an association between two records with <code>#[has_many]</code> and
+<code>#[belongs_to]</code>.</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Identifiable</span>, <span class='ident'>Queryable</span>, <span class='ident'>Associations</span>)]</span>
+<span class='attribute'>#[<span class='ident'>has_many</span>(<span class='ident'>posts</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>User</span> {
+    <span class='ident'>id</span>: <span class='ident'>i32</span>,
+    <span class='ident'>name</span>: <span class='ident'>String</span>,
+}
+
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Identifiable</span>, <span class='ident'>Queryable</span>, <span class='ident'>Associations</span>)]</span>
+<span class='attribute'>#[<span class='ident'>belongs_to</span>(<span class='ident'>User</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Post</span> {
+    <span class='ident'>id</span>: <span class='ident'>i32</span>,
+    <span class='ident'>user_id</span>: <span class='ident'>i32</span>,
+    <span class='ident'>title</span>: <span class='ident'>String</span>,
+}</pre>
+
+<p>Note that in addition to the <code>#[has_many]</code> and <code>#[belongs_to]</code> annotations, we also need to
+<code>#[derive(Associations)]</code></p>
+
+<p><code>#[has_many]</code> should be passed the name of the table that the children will be loaded from,
+while <code>#[belongs_to]</code> is given the name of the struct that represents the parent. Both types
+must implement the <a href="trait.Identifiable.html"><code>Identifiable</code></a> trait.</p>
+
+<p><code>#[has_many]</code> actually has no behavior on its own. It only enables joining between the two
+tables. If you are only accessing data through the <a href="/diesel/prelude/trait.BelongingToDsl.html#tymethod.belonging_to"><code>belonging_to</code></a> method, you
+only need to define the <code>#[belongs_to]</code> side.</p>
+
+<p>Once the associations are defined, you can join between the two tables using the
+<a href="/diesel/query_source/trait.Table.html#method.inner_join"><code>inner_join</code></a> or <a href="/diesel/query_source/trait.Table.html#method.left_outer_join"><code>left_outer_join</code></a>.</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>data</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>(<span class='ident'>User</span>, <span class='ident'>Post</span>)<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>users</span>::<span class='ident'>table</span>.<span class='ident'>inner_join</span>(<span class='ident'>posts</span>::<span class='ident'>table</span>).<span class='ident'>load</span>(<span class='kw-2'>&amp;</span><span class='ident'>connection</span>);</pre>
+
+<p>Note: Due to language limitations, only two tables can be joined per query. This will change in
+the future.</p>
+
+<p>Typically however, queries are loaded in multiple queries. For most datasets, the reduced
+amount of duplicated information sent over the wire saves more time than the extra round trip
+costs us. You can load the children for a single parent using the
+<a href="/diesel/prelude/trait.BelongingToDsl.html#tymethod.belonging_to"><code>belonging_to</code></a></p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>user</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>users</span>::<span class='ident'>find</span>(<span class='number'>1</span>).<span class='ident'>first</span>(<span class='kw-2'>&amp;</span><span class='ident'>connection</span>));
+<span class='kw'>let</span> <span class='ident'>posts</span> <span class='op'>=</span> <span class='ident'>Post</span>::<span class='ident'>belonging_to</span>(<span class='kw-2'>&amp;</span><span class='ident'>user</span>).<span class='ident'>load</span>(<span class='kw-2'>&amp;</span><span class='ident'>connection</span>);</pre>
+
+<p>If you&#39;re coming from other ORMs, you&#39;ll notice that this design is quite different from most.
+There you would have an instance method on the parent, or have the children stored somewhere on
+the posts. This design leads to many problems, including <a href="http://stackoverflow.com/q/97197/1254484">N+1 query
+bugs</a>, and runtime errors when accessing an
+association that isn&#39;t there.</p>
+
+<p>In Diesel, data and its associations are considered to be separate. If you want to pass around
+a user and all of its posts, that type is <code>(User, Vec&lt;Post&gt;)</code>.</p>
+
+<p>Next lets look at how to load the children for more than one parent record.
+<a href="/diesel/prelude/trait.BelongingToDsl.html#tymethod.belonging_to"><code>belonging_to</code></a> can be used to load the data, but we&#39;ll also need to group it
+with its parents. For this we use an additional method <a href="trait.GroupedBy.html#tymethod.grouped_by"><code>grouped_by</code></a></p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>fn</span> <span class='ident'>first_twenty_users_and_their_posts</span>(<span class='ident'>conn</span>: <span class='kw-2'>&amp;</span><span class='ident'>PgConnection</span>) <span class='op'>-&gt;</span> <span class='ident'>QueryResult</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span>(<span class='ident'>User</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Post</span><span class='op'>&gt;</span>)<span class='op'>&gt;&gt;</span> {
+    <span class='kw'>let</span> <span class='ident'>users</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>users</span>::<span class='ident'>limit</span>(<span class='number'>20</span>).<span class='ident'>load</span>::<span class='op'>&lt;</span><span class='ident'>User</span><span class='op'>&gt;</span>(<span class='ident'>conn</span>));
+    <span class='kw'>let</span> <span class='ident'>posts</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Post</span>::<span class='ident'>belonging_to</span>(<span class='kw-2'>&amp;</span><span class='ident'>users</span>).<span class='ident'>load</span>::<span class='op'>&lt;</span><span class='ident'>Post</span><span class='op'>&gt;</span>(<span class='ident'>conn</span>));
+    <span class='kw'>let</span> <span class='ident'>grouped_posts</span> <span class='op'>=</span> <span class='ident'>posts</span>.<span class='ident'>grouped_by</span>(<span class='kw-2'>&amp;</span><span class='ident'>users</span>);
+    <span class='ident'>users</span>.<span class='ident'>into_iter</span>().<span class='ident'>zip</span>(<span class='ident'>grouped_posts</span>).<span class='ident'>collect</span>()
+}</pre>
+
+<p><a href="trait.GroupedBy.html#tymethod.grouped_by"><code>grouped_by</code></a> takes a <code>Vec&lt;Child&gt;</code> and a <code>Vec&lt;Parent&gt;</code> and returns a
+<code>Vec&lt;Vec&lt;Child&gt;&gt;</code> where the index of the children matches the index of the parent they belong
+to. Or to put it another way, it returns them in an order ready to be <code>zip</code>ed with the parents. You
+can do this multiple times. For example, if you wanted to load the comments for all the posts
+as well, you could do this: (explicit type annotations have been added for documentation
+purposes)</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>posts</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Post</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Post</span>::<span class='ident'>belonging_to</span>(<span class='kw-2'>&amp;</span><span class='ident'>users</span>).<span class='ident'>load</span>());
+<span class='kw'>let</span> <span class='ident'>comments</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Comment</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Comment</span>::<span class='ident'>belonging_to</span>(<span class='kw-2'>&amp;</span><span class='ident'>posts</span>).<span class='ident'>load</span>());
+<span class='kw'>let</span> <span class='ident'>comments</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Comment</span><span class='op'>&gt;&gt;</span> <span class='op'>=</span> <span class='ident'>comments</span>.<span class='ident'>grouped_by</span>(<span class='kw-2'>&amp;</span><span class='ident'>posts</span>);
+<span class='kw'>let</span> <span class='ident'>posts_and_comments</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span>(<span class='ident'>Post</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Comment</span><span class='op'>&gt;</span>)<span class='op'>&gt;&gt;</span> <span class='op'>=</span> <span class='ident'>posts</span>.<span class='ident'>into_iter</span>().<span class='ident'>zip</span>(<span class='ident'>comments</span>).<span class='ident'>grouped_by</span>(<span class='kw-2'>&amp;</span><span class='ident'>users</span>);
+<span class='kw'>let</span> <span class='ident'>result</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>(<span class='ident'>User</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span>(<span class='ident'>Post</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Comment</span><span class='op'>&gt;</span>)<span class='op'>&gt;</span>)<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>users</span>.<span class='ident'>into_iter</span>().<span class='ident'>zip</span>(<span class='ident'>posts_and_comments</span>).<span class='ident'>collect</span>();</pre>
+
+<p>And that&#39;s it. This module will be expanded in the future with more complex joins, and the
+ability to define &quot;through&quot; associations (e.g. load all the comments left on any posts written
+by a user in a single query). However, the goal is to provide simple building blocks which can
+be used to construct the complex behavior applications need.</p>
+</div><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class='trait' href='trait.BelongsTo.html'
+                                  title='diesel::associations::BelongsTo'>BelongsTo</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='trait' href='trait.GroupedBy.html'
+                                  title='diesel::associations::GroupedBy'>GroupedBy</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='trait' href='trait.HasTable.html'
+                                  title='diesel::associations::HasTable'>HasTable</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='trait' href='trait.Identifiable.html'
+                                  title='diesel::associations::Identifiable'>Identifiable</a></td>
+                           <td class='docblock-short'>
+                                <p>Represents a struct which can be identified on a single table in the
+database. This must be implemented to use associations, and some features of
+updating. This trait is usually implemented on a reference to a struct, not
+the struct itself.</p>
+                           </td>
+                       </tr></table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "diesel";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>

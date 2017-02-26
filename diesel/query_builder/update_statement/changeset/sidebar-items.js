@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["AsChangeset","Types which can be passed to `update.set`."],["Changeset","Apps should not need to concern themselves with this trait."]]});

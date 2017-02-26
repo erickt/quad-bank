@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `LoadDsl` trait in crate `diesel`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, LoadDsl">
+
+    <title>diesel::prelude::LoadDsl - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>diesel</a>::<wbr><a href='index.html'>prelude</a></p><script>window.sidebarCurrent = {name: 'LoadDsl', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content trait">
+<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>diesel</a>::<wbr><a href='index.html'>prelude</a>::<wbr><a class='trait' href=''>LoadDsl</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../src/diesel/query_dsl/load_dsl.rs.html#12-47' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait LoadDsl&lt;Conn:&nbsp;<a class='trait' href='../../diesel/connection/trait.Connection.html' title='diesel::connection::Connection'>Connection</a>&gt;: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a> <span class='where fmt-newline'>where Conn::<a class='trait' href='../../diesel/connection/trait.Connection.html' title='diesel::connection::Connection'>Backend</a>: <a class='trait' href='../../diesel/types/trait.HasSqlType.html' title='diesel::types::HasSqlType'>HasSqlType</a>&lt;Self::<a class='trait' href='../../diesel/prelude/trait.LoadDsl.html' title='diesel::prelude::LoadDsl'>SqlType</a>&gt;</span> {
+    type <a href='#associatedtype.SqlType' class='type'>SqlType</a>;
+    fn <a href='#tymethod.load' class='fnname'>load</a>&lt;U&gt;(self, conn: &amp;Conn) -&gt; <a class='type' href='../../diesel/result/type.QueryResult.html' title='diesel::result::QueryResult'>QueryResult</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;U&gt;&gt; <span class='where fmt-newline'>where U: <a class='trait' href='../../diesel/query_source/trait.Queryable.html' title='diesel::query_source::Queryable'>Queryable</a>&lt;Self::<a class='trait' href='../../diesel/prelude/trait.LoadDsl.html' title='diesel::prelude::LoadDsl'>SqlType</a>, Conn::<a class='trait' href='../../diesel/connection/trait.Connection.html' title='diesel::connection::Connection'>Backend</a>&gt;</span>;
+    fn <a href='#tymethod.get_result' class='fnname'>get_result</a>&lt;U&gt;(self, conn: &amp;Conn) -&gt; <a class='type' href='../../diesel/result/type.QueryResult.html' title='diesel::result::QueryResult'>QueryResult</a>&lt;U&gt; <span class='where fmt-newline'>where U: <a class='trait' href='../../diesel/query_source/trait.Queryable.html' title='diesel::query_source::Queryable'>Queryable</a>&lt;Self::<a class='trait' href='../../diesel/prelude/trait.LoadDsl.html' title='diesel::prelude::LoadDsl'>SqlType</a>, Conn::<a class='trait' href='../../diesel/connection/trait.Connection.html' title='diesel::connection::Connection'>Backend</a>&gt;</span>;
+
+    fn <a href='#method.first' class='fnname'>first</a>&lt;U&gt;(self, conn: &amp;Conn) -&gt; <a class='type' href='../../diesel/result/type.QueryResult.html' title='diesel::result::QueryResult'>QueryResult</a>&lt;U&gt; <span class='where fmt-newline'>where Self: <a class='trait' href='../../diesel/prelude/trait.LimitDsl.html' title='diesel::prelude::LimitDsl'>LimitDsl</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='type' href='../../diesel/helper_types/type.Limit.html' title='diesel::helper_types::Limit'>Limit</a>&lt;Self&gt;: <a class='trait' href='../../diesel/prelude/trait.LoadDsl.html' title='diesel::prelude::LoadDsl'>LoadDsl</a>&lt;Conn, SqlType=Self::<a class='trait' href='../../diesel/prelude/trait.LoadDsl.html' title='diesel::prelude::LoadDsl'>SqlType</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;U: <a class='trait' href='../../diesel/query_source/trait.Queryable.html' title='diesel::query_source::Queryable'>Queryable</a>&lt;Self::<a class='trait' href='../../diesel/prelude/trait.LoadDsl.html' title='diesel::prelude::LoadDsl'>SqlType</a>, Conn::<a class='trait' href='../../diesel/connection/trait.Connection.html' title='diesel::connection::Connection'>Backend</a>&gt;</span> { ... }
+    fn <a href='#method.get_results' class='fnname'>get_results</a>&lt;U&gt;(self, conn: &amp;Conn) -&gt; <a class='type' href='../../diesel/result/type.QueryResult.html' title='diesel::result::QueryResult'>QueryResult</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;U&gt;&gt; <span class='where fmt-newline'>where U: <a class='trait' href='../../diesel/query_source/trait.Queryable.html' title='diesel::query_source::Queryable'>Queryable</a>&lt;Self::<a class='trait' href='../../diesel/prelude/trait.LoadDsl.html' title='diesel::prelude::LoadDsl'>SqlType</a>, Conn::<a class='trait' href='../../diesel/connection/trait.Connection.html' title='diesel::connection::Connection'>Backend</a>&gt;</span> { ... }
+}</pre><div class='docblock'><p>Methods to execute a query given a connection. These are automatically implemented for the
+various query types.</p>
+</div>
+            <h2 id='associated-types'>Associated Types</h2>
+            <div class='methods'>
+        <h3 id='associatedtype.SqlType' class='method'><span id='SqlType.t' class='invisible'><code>type <a href='#associatedtype.SqlType' class='type'>SqlType</a></code></span></h3></div>
+            <h2 id='required-methods'>Required Methods</h2>
+            <div class='methods'>
+        <h3 id='tymethod.load' class='method'><span id='load.v' class='invisible'><code>fn <a href='#tymethod.load' class='fnname'>load</a>&lt;U&gt;(self, conn: &amp;Conn) -&gt; <a class='type' href='../../diesel/result/type.QueryResult.html' title='diesel::result::QueryResult'>QueryResult</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;U&gt;&gt; <span class='where fmt-newline'>where U: <a class='trait' href='../../diesel/query_source/trait.Queryable.html' title='diesel::query_source::Queryable'>Queryable</a>&lt;Self::<a class='trait' href='../../diesel/prelude/trait.LoadDsl.html' title='diesel::prelude::LoadDsl'>SqlType</a>, Conn::<a class='trait' href='../../diesel/connection/trait.Connection.html' title='diesel::connection::Connection'>Backend</a>&gt;</span></code></span></h3><div class='docblock'><p>Executes the given query, returning an <code>Iterator</code> over the returned
+rows.</p>
+</div><h3 id='tymethod.get_result' class='method'><span id='get_result.v' class='invisible'><code>fn <a href='#tymethod.get_result' class='fnname'>get_result</a>&lt;U&gt;(self, conn: &amp;Conn) -&gt; <a class='type' href='../../diesel/result/type.QueryResult.html' title='diesel::result::QueryResult'>QueryResult</a>&lt;U&gt; <span class='where fmt-newline'>where U: <a class='trait' href='../../diesel/query_source/trait.Queryable.html' title='diesel::query_source::Queryable'>Queryable</a>&lt;Self::<a class='trait' href='../../diesel/prelude/trait.LoadDsl.html' title='diesel::prelude::LoadDsl'>SqlType</a>, Conn::<a class='trait' href='../../diesel/connection/trait.Connection.html' title='diesel::connection::Connection'>Backend</a>&gt;</span></code></span></h3><div class='docblock'><p>Runs the command, and returns the affected row. <code>Err(NotFound)</code> will be
+returned if the query affected 0 rows. You can call <code>.optional()</code> on the
+result of this if the command was optional to get back a
+<code>Result&lt;Option&lt;U&gt;&gt;</code></p>
+</div></div>
+            <h2 id='provided-methods'>Provided Methods</h2>
+            <div class='methods'>
+        <h3 id='method.first' class='method'><span id='first.v' class='invisible'><code>fn <a href='#method.first' class='fnname'>first</a>&lt;U&gt;(self, conn: &amp;Conn) -&gt; <a class='type' href='../../diesel/result/type.QueryResult.html' title='diesel::result::QueryResult'>QueryResult</a>&lt;U&gt; <span class='where fmt-newline'>where Self: <a class='trait' href='../../diesel/prelude/trait.LimitDsl.html' title='diesel::prelude::LimitDsl'>LimitDsl</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='type' href='../../diesel/helper_types/type.Limit.html' title='diesel::helper_types::Limit'>Limit</a>&lt;Self&gt;: <a class='trait' href='../../diesel/prelude/trait.LoadDsl.html' title='diesel::prelude::LoadDsl'>LoadDsl</a>&lt;Conn, SqlType=Self::<a class='trait' href='../../diesel/prelude/trait.LoadDsl.html' title='diesel::prelude::LoadDsl'>SqlType</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;U: <a class='trait' href='../../diesel/query_source/trait.Queryable.html' title='diesel::query_source::Queryable'>Queryable</a>&lt;Self::<a class='trait' href='../../diesel/prelude/trait.LoadDsl.html' title='diesel::prelude::LoadDsl'>SqlType</a>, Conn::<a class='trait' href='../../diesel/connection/trait.Connection.html' title='diesel::connection::Connection'>Backend</a>&gt;</span></code></span></h3><div class='docblock'><p>Attempts to load a single record. Returns <code>Ok(record)</code> if found, and
+<code>Err(NotFound)</code> if no results are returned. If the query truly is
+optional, you can call <code>.optional()</code> on the result of this to get a
+<code>Result&lt;Option&lt;U&gt;&gt;</code>.</p>
+</div><h3 id='method.get_results' class='method'><span id='get_results.v' class='invisible'><code>fn <a href='#method.get_results' class='fnname'>get_results</a>&lt;U&gt;(self, conn: &amp;Conn) -&gt; <a class='type' href='../../diesel/result/type.QueryResult.html' title='diesel::result::QueryResult'>QueryResult</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;U&gt;&gt; <span class='where fmt-newline'>where U: <a class='trait' href='../../diesel/query_source/trait.Queryable.html' title='diesel::query_source::Queryable'>Queryable</a>&lt;Self::<a class='trait' href='../../diesel/prelude/trait.LoadDsl.html' title='diesel::prelude::LoadDsl'>SqlType</a>, Conn::<a class='trait' href='../../diesel/connection/trait.Connection.html' title='diesel::connection::Connection'>Backend</a>&gt;</span></code></span></h3><div class='docblock'><p>Runs the command, returning an <code>Iterator</code> over the affected rows.</p>
+</div></div>
+        <h2 id='implementors'>Implementors</h2>
+        <ul class='item-list' id='implementors-list'>
+    <li><code>impl&lt;'a, T, U, Op, Ret, Conn, ST&gt; LoadDsl&lt;Conn&gt; for <a class='struct' href='../../diesel/query_builder/insert_statement/struct.BatchInsertStatement.html' title='diesel::query_builder::insert_statement::BatchInsertStatement'>BatchInsertStatement</a>&lt;T, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a [</a>U<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, Op, Ret&gt; <span class='where fmt-newline'>where Conn: <a class='trait' href='../../diesel/connection/trait.Connection.html' title='diesel::connection::Connection'>Connection</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conn::<a class='trait' href='../../diesel/connection/trait.Connection.html' title='diesel::connection::Connection'>Backend</a>: <a class='trait' href='../../diesel/types/trait.HasSqlType.html' title='diesel::types::HasSqlType'>HasSqlType</a>&lt;ST&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='struct' href='../../diesel/query_builder/insert_statement/struct.InsertStatement.html' title='diesel::query_builder::insert_statement::InsertStatement'>InsertStatement</a>&lt;T, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a [</a>U<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, Op, Ret&gt;: <a class='trait' href='../../diesel/prelude/trait.LoadDsl.html' title='diesel::prelude::LoadDsl'>LoadDsl</a>&lt;Conn, SqlType=ST&gt;</span></code></li>
+<li><code>impl&lt;Conn:&nbsp;<a class='trait' href='../../diesel/connection/trait.Connection.html' title='diesel::connection::Connection'>Connection</a>, T:&nbsp;<a class='trait' href='../../diesel/query_builder/trait.AsQuery.html' title='diesel::query_builder::AsQuery'>AsQuery</a>&gt; LoadDsl&lt;Conn&gt; for T <span class='where fmt-newline'>where T::<a class='trait' href='../../diesel/query_builder/trait.AsQuery.html' title='diesel::query_builder::AsQuery'>Query</a>: <a class='trait' href='../../diesel/query_builder/trait.QueryFragment.html' title='diesel::query_builder::QueryFragment'>QueryFragment</a>&lt;Conn::<a class='trait' href='../../diesel/connection/trait.Connection.html' title='diesel::connection::Connection'>Backend</a>&gt; + <a class='trait' href='../../diesel/query_builder/trait.QueryId.html' title='diesel::query_builder::QueryId'>QueryId</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conn::<a class='trait' href='../../diesel/connection/trait.Connection.html' title='diesel::connection::Connection'>Backend</a>: <a class='trait' href='../../diesel/types/trait.HasSqlType.html' title='diesel::types::HasSqlType'>HasSqlType</a>&lt;T::<a class='trait' href='../../diesel/query_builder/trait.AsQuery.html' title='diesel::query_builder::AsQuery'>SqlType</a>&gt;</span></code></li>
+</ul><script type="text/javascript" async
+                         src="../../implementors/diesel/prelude/trait.LoadDsl.js">
+                 </script></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "diesel";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>

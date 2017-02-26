@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["establish_connection","Create a connection to the SQLite database."],["establish_connection_pool","Create a pool of SQLite connections to the database."]],"mod":[["models",""],["schema",""]],"type":[["SqliteConnectionPool",""]]});

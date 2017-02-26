@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `NewAccount` struct in crate `quad_diesel`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, NewAccount">
+
+    <title>quad_diesel::models::NewAccount - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>quad_diesel</a>::<wbr><a href='index.html'>models</a></p><script>window.sidebarCurrent = {name: 'NewAccount', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>quad_diesel</a>::<wbr><a href='index.html'>models</a>::<wbr><a class='struct' href=''>NewAccount</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../src/quad_diesel/models.rs.html#72-75' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct NewAccount&lt;'a&gt; {
+    pub username: &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>,
+    pub balance: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>,
+}</pre><h2 class='fields'>Fields</h2><span id='structfield.username' class='structfield'>
+                           <span id='username.v' class='invisible'>
+                           <code>username: &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.balance' class='structfield'>
+                           <span id='balance.v' class='invisible'>
+                           <code>balance: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a></code>
+                           </span></span><span class='stab '></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a, 'insert, DB&gt; <a class='trait' href='../../diesel/insertable/trait.Insertable.html' title='diesel::insertable::Insertable'>Insertable</a>&lt;<a class='struct' href='../../quad_diesel/schema/accounts/struct.table.html' title='quad_diesel::schema::accounts::table'>table</a>, DB&gt; for &amp;'insert <a class='struct' href='../../quad_diesel/models/struct.NewAccount.html' title='quad_diesel::models::NewAccount'>NewAccount</a>&lt;'a&gt; <span class='where fmt-newline'>where DB: <a class='trait' href='../../diesel/backend/trait.Backend.html' title='diesel::backend::Backend'>Backend</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a>ColumnInsertValue&lt;<a class='struct' href='../../quad_diesel/schema/accounts/columns/struct.username.html' title='quad_diesel::schema::accounts::columns::username'>username</a>, AsNullableExpr&lt;&amp;'insert &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, <a class='struct' href='../../quad_diesel/schema/accounts/columns/struct.username.html' title='quad_diesel::schema::accounts::columns::username'>username</a>&gt;&gt;, ColumnInsertValue&lt;<a class='struct' href='../../quad_diesel/schema/accounts/columns/struct.balance.html' title='quad_diesel::schema::accounts::columns::balance'>balance</a>, AsNullableExpr&lt;&amp;'insert <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>, <a class='struct' href='../../quad_diesel/schema/accounts/columns/struct.balance.html' title='quad_diesel::schema::accounts::columns::balance'>balance</a>&gt;&gt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>: InsertValues&lt;DB&gt;</span></code></span><span class='out-of-band'></span></h3>
+<div class='impl-items'><h4 id='associatedtype.Values' class='type'><span id='Values.t' class='invisible'><code>type <a href='../../diesel/insertable/trait.Insertable.html#associatedtype.Values' class='type'>Values</a> = <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a>ColumnInsertValue&lt;<a class='struct' href='../../quad_diesel/schema/accounts/columns/struct.username.html' title='quad_diesel::schema::accounts::columns::username'>username</a>, AsNullableExpr&lt;&amp;'insert &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, <a class='struct' href='../../quad_diesel/schema/accounts/columns/struct.username.html' title='quad_diesel::schema::accounts::columns::username'>username</a>&gt;&gt;, ColumnInsertValue&lt;<a class='struct' href='../../quad_diesel/schema/accounts/columns/struct.balance.html' title='quad_diesel::schema::accounts::columns::balance'>balance</a>, AsNullableExpr&lt;&amp;'insert <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>, <a class='struct' href='../../quad_diesel/schema/accounts/columns/struct.balance.html' title='quad_diesel::schema::accounts::columns::balance'>balance</a>&gt;&gt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a></code></span></h4>
+<h4 id='method.values' class='method'><span id='values.v' class='invisible'><code>fn <a href='../../diesel/insertable/trait.Insertable.html#tymethod.values' class='fnname'>values</a>(self) -&gt; Self::<a class='trait' href='../../diesel/insertable/trait.Insertable.html' title='diesel::insertable::Insertable'>Values</a></code></span></h4>
+</div><h3 class='impl'><span class='in-band'><code>impl&lt;'a: 'insert, 'insert, Op, Ret&gt; <a class='trait' href='../../diesel/query_builder/insert_statement/trait.IntoInsertStatement.html' title='diesel::query_builder::insert_statement::IntoInsertStatement'>IntoInsertStatement</a>&lt;<a class='struct' href='../../quad_diesel/schema/accounts/struct.table.html' title='quad_diesel::schema::accounts::table'>table</a>, Op, Ret&gt; for &amp;'insert <a class='struct' href='../../quad_diesel/models/struct.NewAccount.html' title='quad_diesel::models::NewAccount'>NewAccount</a>&lt;'a&gt;</code></span><span class='out-of-band'></span></h3>
+<div class='impl-items'><h4 id='associatedtype.InsertStatement' class='type'><span id='InsertStatement.t' class='invisible'><code>type <a href='../../diesel/query_builder/insert_statement/trait.IntoInsertStatement.html#associatedtype.InsertStatement' class='type'>InsertStatement</a> = <a class='struct' href='../../diesel/query_builder/insert_statement/struct.InsertStatement.html' title='diesel::query_builder::insert_statement::InsertStatement'>InsertStatement</a>&lt;<a class='struct' href='../../quad_diesel/schema/accounts/struct.table.html' title='quad_diesel::schema::accounts::table'>table</a>, Self, Op, Ret&gt;</code></span></h4>
+<h4 id='method.into_insert_statement' class='method'><span id='into_insert_statement.v' class='invisible'><code>fn <a href='../../diesel/query_builder/insert_statement/trait.IntoInsertStatement.html#tymethod.into_insert_statement' class='fnname'>into_insert_statement</a>(self,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; target: <a class='struct' href='../../quad_diesel/schema/accounts/struct.table.html' title='quad_diesel::schema::accounts::table'>table</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; operator: Op,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; returning: Ret)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; Self::<a class='trait' href='../../diesel/query_builder/insert_statement/trait.IntoInsertStatement.html' title='diesel::query_builder::insert_statement::IntoInsertStatement'>InsertStatement</a></code></span></h4>
+</div><h3 class='impl'><span class='in-band'><code>impl&lt;'a: 'insert, 'insert&gt; <a class='trait' href='../../diesel/query_builder/insert_statement/trait.UndecoratedInsertRecord.html' title='diesel::query_builder::insert_statement::UndecoratedInsertRecord'>UndecoratedInsertRecord</a>&lt;<a class='struct' href='../../quad_diesel/schema/accounts/struct.table.html' title='quad_diesel::schema::accounts::table'>table</a>&gt; for &amp;'insert <a class='struct' href='../../quad_diesel/models/struct.NewAccount.html' title='quad_diesel::models::NewAccount'>NewAccount</a>&lt;'a&gt;</code></span><span class='out-of-band'></span></h3>
+<div class='impl-items'></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "quad_diesel";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>
