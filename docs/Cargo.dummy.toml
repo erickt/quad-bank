@@ -1,0 +1,8 @@
+# travis-cargo looks at the crate name to redirect index.html to the main
+# crate. We want that to be the quad-diesel crate.
+
+[package]
+name = "quad-diesel"
+version = "0.1.0"
+authors = ["Erick Tryzelaar <erick.tryzelaar@gmail.com>"]
+publish = false

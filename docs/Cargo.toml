@@ -1,0 +1,11 @@
+[package]
+name = "docs"
+version = "0.1.0"
+authors = ["Erick Tryzelaar <erick.tryzelaar@gmail.com>"]
+publish = false
+
+[dependencies]
+quad-cli = { path = "../quad-cli" }
+quad-diesel = { path = "../quad-diesel" }
+quad-iron = { path = "../quad-iron" }
+quad-rocket = { path = "../quad-rocket" }
