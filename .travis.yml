@@ -25,3 +25,7 @@ script:
 - (cd quad-cli && travis-cargo build)
 - (cd quad-iron && travis-cargo build)
 - (cd quad-rocket && travis-cargo --only nightly build)
+
+env:
+  global:
+  - TRAVIS_CARGO_NIGHTLY_FEATURE=""
