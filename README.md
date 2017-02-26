@@ -1,5 +1,9 @@
 # Overhanded Quadrilateral Bank
 
+[![Travis Build Status](https://travis-ci.org/erickt/quad-bank.png?branch=master)](https://travis-ci.org/erickt/quad-bank)
+
+[Documentation](https://erickt.github.io/quad-bank)
+
 `quad_bank` is a Rust project to demonstrate how one can build a payment
 processor for the [Underhanded Rust
 Contest](https://underhanded.rs/blog/2016/12/15/underhanded-rust.en-US.html).

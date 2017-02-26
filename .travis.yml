@@ -20,11 +20,11 @@ script:
 - "(cd quad-diesel && travis-cargo build)"
 - "(cd quad-cli && travis-cargo build)"
 - "(cd quad-iron && travis-cargo build)"
-- "(cd quad-rocket && travis-cargo --only nightly build)"
-- "(cd docs && travis-cargo --only nightly doc)"
+- "(cd quad-rocket && travis-cargo --only nightly-2017-02-12 build)"
+- "(cd docs && travis-cargo --only nightly-2017-02-12 doc)"
 after_success:
 - mv docs/Cargo.dummy.toml docs/Cargo.toml
-- "(cd docs && travis-cargo --only nightly doc-upload)"
+- "(cd docs && travis-cargo --only nightly-2017-02-12 doc-upload)"
 env:
   global:
   - TRAVIS_CARGO_NIGHTLY_FEATURE=""
