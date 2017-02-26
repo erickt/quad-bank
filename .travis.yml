@@ -3,37 +3,29 @@ sudo: false
 addons:
   apt:
     packages:
-      - libcurl4-openssl-dev
-      - libelf-dev
-      - libdw-dev
-      - binutils-dev # optional: only required for the --verify flag of coveralls
-
+    - libcurl4-openssl-dev
+    - libelf-dev
+    - libdw-dev
+    - binutils-dev
 rust:
 - stable
 - beta
-# FIXME: Waiting for https://github.com/rust-lang/rust/pull/40111 to land
-#- nightly
 - nightly-2017-02-12
-
-# load travis-cargo
 before_script:
 - |
-    pip install 'travis-cargo<0.2' --user &&
-    export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
-
+  pip install 'travis-cargo<0.2' --user &&
+  export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 script:
 #- ./bootstrap.sh
-#- (cd quad-diesel && travis-cargo build)
-#- (cd quad-cli && travis-cargo build)
-#- (cd quad-iron && travis-cargo build)
-#- (cd quad-rocket && travis-cargo --only nightly build)
-- (cd docs && travis-cargo --only nightly doc)
-
+#- "(cd quad-diesel && travis-cargo build)"
+#- "(cd quad-cli && travis-cargo build)"
+#- "(cd quad-iron && travis-cargo build)"
+#- "(cd quad-rocket && travis-cargo --only nightly build)"
+- "(cd docs && travis-cargo --only nightly doc)"
 after_success:
 - mv docs/Cargo.dummy.toml docs/Cargo.toml
-- (cd docs && travis-cargo --only nightly doc-upload)
-
+- "(cd docs && travis-cargo --only nightly doc-upload)"
 env:
   global:
   - TRAVIS_CARGO_NIGHTLY_FEATURE=""
-  - secure: "TD6O0JKWrCjt5K4AwxmZOyJ1xm6WWjFPbGyWJAtG0eE0qNhImw0Hg0kBknHBAOlas5C+DnnBiZp0vWgar+TjjNb96j3R5+K7qCqaJ2AcZtYYpjk8aR00HaimUOLhEWXJCHAmhsdS9UA2GXTCToH4EKhOElGGh2pHNpRy/Kn8dh0D/UVl98o9H0tTH0pYdDKnGoV6JrVG9PW5MAjsn+nBRyK25pAYkY3qmQTXmFEZYOywuiFzHjzoaTYjXrjNyD8ZIAxuaK+8hd6H0lkp7ywj8QOv9K6arzdbxDMubLTiZt5mmAF0iBwG3shJIzlcHLIa8iILvB+SuTOJsDpi2rfn6JG2D56FCcwjssQqpuuw3/r/NLaYnUNLeKD3KQaWlB/syonToidW6zkQG3hOXJi5ABUvwTH8B7BbFy8b274cmB7rhT2JWAKzlO0FCEnE2Xc0sKHPte9pMhYmsuwDjvRNJqh6buMpELzkw11YMK6LsxyeCt+O9J01oAN5IcycNOYgMogwl+fmeUy1ICg73Sswo8n++BWD8zhCvFTVsiGWLFj8/T0upYnFn6rNmgG1AJTQ0LS/kbRsQU4LUDeLoGO4+PPVaQ2hWxrQIGXuCWX4Bxuj+QkJoDNWcC8Wrc9kxoe3HzO7ICOzRPEZOIfQ1Vl3dB9YdAO3L2lVj4eDZrKZPPA="
+  - secure: Ps6SBBO3TIxJ49fEumtfMnbHDYJ9IaSTt4JW1VKyvDDsmYZPelZiWZAsa+oua9Bt2LqhcUbm7olq+qjodWdb8hWrDRdUiPtEVzvlAjAQ/bJFlL1oYF83Z1ZQdwezACuqhy48ul97PvtNg3Kd08tr1ARVTL2Nuntl+s12WXLvmzyxggrOHalrOEKDmekEoluVDlMcw1s0W86Wrj+zFB110aFlsFFvq5vi1Rddv9JBUyMY7+yYopeOqoLU6LMpug9JeC8MOGztcdrQR2gPXN89xbTZ5OxKw00nnXdH2uYGrsGxLyzWbJ1TsujQoRF6iUf5ss9/4BTZYspVb32yajUZ8egzyY65aCLALEaNTcSEqstIlrVTO/lJLW7rJxR/ASyqiBcyTcuTVsHFRHA9DDQlz+T4RCk7nlSuw3g9iB90WgXDI5MCIfwpmJmL9Fvc7siac9MeENeeo28p1styRMuQmGfTVxY4mOvmYL4NV+a8JZYcfAdnhNvj18zDYZ7gnU6dnOki5I/V3mXbS0pqzHqLwSg02tk6sz9CqckbMlumqe55jTYPDpgjY+zycdmsZn42WVOdIXcXOEh1LtUYKutrwsNdMCpMUuZt8cpL2dNudLeJGp5WQ3LHFxSzJGVDa+XO8pmYdg5tY3+dukMOjK1PFnt77Nt49yYD6ETGd2Yt2lk=
