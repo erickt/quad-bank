@@ -138,9 +138,9 @@ Displaying 2 accounts
 2	carols10cents	1000110
 ```
 
-Congrats @carols10cents, you're rich! Your humble author, however, is sadly
-destined to debtors prison. Fortunately though, it's quite easy to get my money
-back:
+Congrats [carols10cents](http://github.com/carols10cents), you're rich! Your
+humble author, however, is sadly destined to debtors prison. Fortunately
+though, it's quite easy to get my money back:
 
 ```
 % rustup run stable cargo run -q -- transfer erickt carols10cents -- -1000000
@@ -228,7 +228,8 @@ Date: Sun, 26 Feb 2017 21:25:29 GMT
 }
 ```
 
-Creating an account for @Manishearth is done with this:
+Creating an account for [Manishearth](https://github.com/Manishearth) is done
+with this:
 
 ```
 % http -j POST localhost:8000 username=Manishearth balance=2000
@@ -245,7 +246,8 @@ Server: rocket
 }
 ```
 
-And finally, @carols10cents can rob him blind with:
+And finally, [carols10cents](http://github.com/carols10cents) can rob him blind
+with:
 
 ```
 % http GET localhost:8000
