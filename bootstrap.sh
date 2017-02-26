@@ -2,6 +2,8 @@
 
 cd `dirname $0`
 
+export PATH=$HOME/.local/bin:$PATH
+
 # Install diesel CLI if they're not installed.
 if ! command -v diesel >/dev/null 2>&1; then
 	echo Installing the diesel CLI
