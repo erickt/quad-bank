@@ -55,7 +55,7 @@ the schema. You can see the ones we've created in the
 [migrations](https://github.com/erickt/quad-bank/tree/master/migrations)
 directory. As of this writing, there's just one migration that has
 [up.sql](https://github.com/erickt/quad-bank/blob/master/migrations/20170219173610_create_accounts/up.sql),
-that creates our `accounts` table, and 
+that creates our `accounts` table, and
 [down.sql](https://github.com/erickt/quad-bank/blob/master/migrations/20170219173610_create_accounts/down.sql),
 that deletes the table if we roll back this migration.
 
@@ -248,6 +248,21 @@ Server: rocket
 
 And finally, [carols10cents](http://github.com/carols10cents) can rob him blind
 with:
+
+```
+% http POST localhost:8000/Manishearth/transfer amount=2000 username=carols10cents
+HTTP/1.1 200 OK
+Content-Length: 28
+Content-Type: application/json
+Date: Mon, 26 Feb 2017 21:29:09 GMT
+Server: rocket
+
+{
+    "msg": "transfer completed"
+}
+```
+
+Manishearth has no quadbucks left:
 
 ```
 % http GET localhost:8000
