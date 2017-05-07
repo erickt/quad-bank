@@ -5,5 +5,5 @@ authors = ["Erick Tryzelaar <erick.tryzelaar@gmail.com>"]
 
 [dependencies]
 clap = "2.20.5"
-diesel = { version = "0.11.0", features = ["sqlite"] }
+diesel = { version = "0.12.0", features = ["sqlite"] }
 quad-diesel = { path = "../quad-diesel" }
